@@ -1,5 +1,4 @@
 
-
 library(shiny)
 
 # Define server logic for slider examples
@@ -39,10 +38,11 @@ shinyServer(function(input, output, session) {
             FPO <- NULL;
             return(list(Abs,FPO));
         }else{
+            Inds      <- 400;  # Total individuals IBM
             timestep  <- 1;
-            Kmax      <- round(K   * 1000);
-            N_initial <- round(N_initial * 1000);
-            P_initial <- round(P_initial * 1000);
+            Kmax      <- round(K   * Inds);
+            N_initial <- round(N_initial * Inds);
+            P_initial <- round(P_initial * Inds);
             N         <- rep(x=0, times=time_max);
             P         <- rep(x=0, times=time_max);
             N[1]      <- N_initial;
@@ -105,24 +105,23 @@ shinyServer(function(input, output, session) {
                             }
                         }
                         for(i in 1:dim(Pp)[1]){ # Explain why 1s and 2s work later.
-                            for(j in 1:dim(Np)[1]){
-                                if(abs(Pp[i,1]-Np[j,1])<=2 & abs(Pp[i,2]-Np[j,2])<=2){
-                                    kill1  <- 0.5*attack > runif(n=1,min=0,max=1);
-                                    kill2  <- 0.5*attack > runif(n=1,min=0,max=1);
-                                    if(kill1 == TRUE | kill2 == TRUE){
-                                        Np[j,] <- c(-200,-200);
-                                        birth1   <- 0.5*b > runif(n=1,min=0,max=1);
-                                        birth2   <- 0.5*b > runif(n=1,min=0,max=1);
-                                        if(birth1==TRUE){ 
-                                           Pp1     <- round(runif(n=1,min=0,max=100),digits=0);
-                                           Pp2     <- round(runif(n=1,min=0,max=100),digits=0);
-                                           newpred <- rbind(newpred,c(Pp1,Pp2));
-                                        }
-                                        if(birth2==TRUE){
-                                           Pp1     <- round(runif(n=1,min=0,max=100),digits=0);
-                                           Pp2     <- round(runif(n=1,min=0,max=100),digits=0);
-                                           newpred <- rbind(newpred,c(Pp1,Pp2));
-                                        }
+                            enc  <- which(abs(Pp[i,1]-Np[,1])<=2 & abs(Pp[i,2]-Np[,2])<=2); 
+                            if(sum(enc) > 0){
+                                odz  <- runif(n = 2*length(enc), min = 0, max = 1);
+                                kill <- matrix(data = odz, ncol = 2);
+                                kill <- (0.5*attack) > kill;
+                                dead <- which(apply(X=kill,MARGIN=1,FUN=sum)>0);
+                                if(sum(dead) > 0){
+                                    Np[enc[dead],] <- c(-200,-200);
+                                    bodz      <- runif(n = 2*length(dead), min = 0, max = 1);
+                                    bodz      <- matrix(data = bodz, ncol = 2);
+                                    born      <- 0.5*b > bodz;
+                                    birth     <- sum(born);
+                                    if(birth > 0){
+                                        tbrn    <- birth;
+                                        Pp1     <- round(runif(n=tbrn,min=0,max=100),digits=0);
+                                        Pp2     <- round(runif(n=tbrn,min=0,max=100),digits=0);
+                                        newpred <- rbind(newpred,cbind(Pp1,Pp2));
                                     }
                                 }
                             }
@@ -145,10 +144,12 @@ shinyServer(function(input, output, session) {
                 }
                 birthp <- runif(n=dim(Np)[1],min=0,max=1);
                 births <- sum(birthp < (0.5*lambda_N));
-                Np1    <- round(runif(n=births,min=0,max=100),digits=0);
-                Np2    <- round(runif(n=births,min=0,max=100),digits=0);
-                newNs  <- cbind(Np1,Np2);
-                Np     <- rbind(Np,newNs);
+                if(births > 0){
+                    Np1    <- round(runif(n=births,min=0,max=100),digits=0);
+                    Np2    <- round(runif(n=births,min=0,max=100),digits=0);
+                    newNs  <- cbind(Np1,Np2);
+                    Np     <- rbind(Np,newNs);
+                }
                 if(is.null(dim(Np)[1])){
                     break;
                 }
@@ -217,7 +218,8 @@ shinyServer(function(input, output, session) {
             }
         }else{
             Ress <- Ds();
-            Dens <- Ress[[1]] * 0.001;
+            Inds <- 400;
+            Dens <- Ress[[1]] * (1/Inds);
             FPO  <- Ress[[2]];
             if(ts$ct == input$time){
                 gen <- ts$ct - 1;
