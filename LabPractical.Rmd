@@ -1,0 +1,58 @@
+---
+title: "Ecological modelling lab practical"
+author: "Brad Duthie"
+date: "March 1, 2016"
+output: html_document
+---
+
+******************************
+
+This lab will introduce ecological models by simulating how species abudances change over time in predator-prey interactions. **First**, this lab will explore discrete time numerical models of predator-prey interactions using Lotka-Volterra equations. This type of model has a long history in the development of ecological theory. The term "discrete time" means that the model considers how predator and prey populations change from one individual time step to the next, i.e., from `t` to `t+1`. In contrast, in a "continuous time" model, time would be smooth, not be broken up into individual steps. The term "numerical model" means that species abundances (or densities -- e.g., number of individuals per km) are represented by numbers, and equations can be used to predict how abundances change over time. In contrast, an "individual-based model" (sometimes called an "agent-based model") is the **second** type of model this lab will explore. This type of model also simulates discrete (as opposed to continuous) time, but it does not use numbers directly to represent population abundances, nor equations to predict how populations change. Instead, the individual-based model used here will track individuals explicitly, simulating their births and deaths explicitly using an algorithm written in the R programming environment. 
+
+**The goal of this lab is to introduce you to thinking about how ecological models can be used as a tool for more clearly thinking about how populations change over time, specifically connecting mechanisms of population dynamics and species interactions to predictions about population densities. This goal will be accomplished by connecting ecologically important processes that affect population change (e.g., birth, death, and predation) to the numerical equations or simulated events that model changing species densities, and by comparing predictions between model types. At the end of this lab, you should therefore be able to use simple ecological models as conceptual tools for making inferences about population change.**
+
+********************************
+
+Getting started
+===========================================
+
+We will first look at how to use the educational software, which can be accessed in an Internet browser at <https://bradduthie.shinyapps.io/EcoEdu/>. The interface of this software allows you to specify variables that affect population dynamics in the left panel; the output of these variables simulates preadator and prey populations over time in the right panel.
+
+> **Note**: This program might flicker when plotting graphs and equations. To avoid this and finish any simulation, simply click the *Finish* button in the bottom left panel.
+
+The image below shows the interface of the software. 
+
+![Image showing software interface](TopInterface.jpg)
+
+When the browser is first loaded (or refreshed), the panel on the right is not visible. The pulldown menu on the left allows you to specify the type of model that you want to run, either numerical or individual-based. Below this pulldown menu, all of the sliders allow you to adjust key variables in the model (the bottom two variables adjust how far individuals move, and only effect population change in the individual-based model). The output produced from these variables is presented in two ways on the right-hand panel. First, what the model is doing is shown in the coloured box. In the case of the numerical model, this box is grey, and it shows how the variables you put into the left panel are used in equations calculating prey and predator densities (more on this later). In the case of the individual-based model, this box is tan, and it shows individuals moving around in a simulated environment. The plot beneath the coloured box shows how prey (black) and predator (red) densities are predicted to change over time given the variables you put into the left panel.
+
+To run a simulation, click the `Run` button at the bottom of the left panel. This will start a simulation, and you should see what the model is doing (coloured box) to predict species densities over time (plotted lines). To finish a simulation quickly, click the `Finish` button. Before running another simulation, be sure to click the `Reset` button.
+
+![Image showing software interface](RunCommands.jpg)
+
+This should be all that you need to know to start exploring predator-prey ecological models. If at any time the software appears to have crashed, first try clicking the `Reset` button. If that fails, refreshing the page in your browswer should work.
+
+********************************
+
+Numerical model: prey population growth
+===========================================
+
+First we will explore a simple discrete time Lotka-Volterra model of prey population growth in the absence of predators. **Change model parameters to the following values**:
+
+```
+Model parameter                   | Set value
+----------------------------------|------------
+Number of generations             | 100
+Initial prey density              | 0.02
+Initial predator density          | 0
+Prey population growth rate       | 0.2
+Predator population decline rate  | 0
+Attack rate of predators          | 0
+Prey density carrying capacity    | 0.4
+Predator births per attack        | 0
+```
+
+Next, hit `Run` and watch how the prey population density changes over time. Find the values you set for `Prey population growth rate` and `Prey density carrying capacity` in the equation shown in the grey box. Try to connect how those values you specified on the right side of the equation affect the value on the left side of the equation. Next, notice how the solution on the left side of the equation is plotted on the y-axis below. If you want to see this more than once, press the `Reset` button, then the `Run` button again.
+
+
+
