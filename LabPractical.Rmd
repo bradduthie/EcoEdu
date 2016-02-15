@@ -2,7 +2,7 @@
 title: "Ecological modelling lab practical"
 author: "Brad Duthie"
 date: "March 1, 2016"
-output: html_document
+output: pdf_document
 ---
 
 ******************************
