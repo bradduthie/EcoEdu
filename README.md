@@ -1,7 +1,7 @@
 EcoEdu Lotka-Volterra models
 ============================================
 
-This project is an educational tool for model inference and model development in ecology. The best way to use this software is by going to < https://bradduthie.shinyapps.io/EcoEdu/ >, which incldues a an easy to use interface that can be run directly from a web browswer.
+This project is an educational tool for model inference and model development in ecology. The best way to use this software is by going to < https://bradduthie.shinyapps.io/EcoEdu/ >, which includes an easy to use interface that can be run directly from a web browswer.
 
 The code underlying the software is presented here in two versions. The first version includes all of the code needed to run the easy to use interface locally within a browser ( Server.R and ui.r ). The second version is a simplified version of *only* the individual-based-model, with annotated code that can be used and explored directly in the R console.
 
