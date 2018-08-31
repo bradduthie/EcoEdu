@@ -1,0 +1,12 @@
+name: EcoEdu
+title:
+username:
+account: bradduthie
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 82078
+bundleId: 1520448
+url: https://bradduthie.shinyapps.io/EcoEdu/
+when: 1533553247.37782
+asMultiple: FALSE
+asStatic: FALSE

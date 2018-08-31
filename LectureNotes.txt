@@ -1,0 +1,40 @@
+Title slide:
+
+- Interested in modelling how populations change over time
+- Population is a group of individuals of the same species in some area
+  - E.g., humans in Aberdeen are a population
+  - Seagulls in Aberdeen are a population
+
+Modelling population dynamics:
+
+- Models look at how the density of species changes
+  - Discrete time approach looks at `chunks' of time
+    - e.g., one year to the next; one season to the next
+    - Tend to be more intuitive when learning modelling
+    - Also easier to compare with another type of model (IBM)
+  - Continuous time models assumes time passes smoothly
+    - Use calculus to project continuous growth
+- We'll assume all individuals are the same (though could model age, etc.)
+- Goal to predict population growth, but also *understand* dynamics
+
+Logistic population growth:
+
+- Species density at time t+1 is just density at t + change
+  - *Ask* what are some things that can change density?
+  - Mention all, but note we'll only talk about birth and death
+
+Logistic population growth II:
+
+- Just the present population density plus net change in growth
+  - Per capita net change from t \to t+1 is R
+  - Examples of R
+  - *Ask* is this growth realistic? (lead into K)
+
+Logistic growth (lab practical software):
+
+- Briefly point out some of the features
+- Predator-prey dynamics are coming on the next slide
+
+
+
+
