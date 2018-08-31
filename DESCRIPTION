@@ -1,0 +1,23 @@
+Package: EcoEdu
+Type: Package
+Title: Educational software for ecology, evolution, and conservation biology
+Version: 0.0.0.1
+Imports: grDevices, graphics, stats, shiny, shinydashboard, shinyjs
+Authors@R: c(person("A. Bradley", "Duthie", email = "brad.duthie@gmail.com",
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0001-8343-4995")),
+             person("James", "Church", role = c("aut"))
+             )
+Maintainer: A. Bradley Duthie <brad.duthie@gmail.com>
+Description: An educational tool.
+URL: https://bradduthie.github.io/EcoEdu/
+BugReports: https://github.com/bradduthie/EcoEdu/issues
+Depends: R (>= 3.4.0)
+License: MIT
+LazyData: TRUE
+VignetteBuilder: R.rsp
+Suggests: knitr,
+    rmarkdown,
+    testthat,
+    R.rsp
+RoxygenNote: 6.1.0
